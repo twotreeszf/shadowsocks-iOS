@@ -7,8 +7,8 @@
 //
 #import "SWBAppDelegate.h"
 
-#import "SWBViewController.h"
 #import "ShadowsocksRunner.h"
+#import "ProxySettingsTableViewController.h"
 
 #define kProxyModeKey @"proxy mode"
 
@@ -29,14 +29,24 @@
         [self runProxy];
     });
 
-    self.networkActivityIndicatorManager = [[SWBNetworkActivityIndicatorManager alloc] init];
-
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[SWBViewController alloc] init];
-    self.window.rootViewController = self.viewController;
+    
+    ProxySettingsTableViewController *settingsController = [[ProxySettingsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settingsController];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-        
+
+    /*
+    QRCodeViewController *qrCodeViewController = [[QRCodeViewController alloc] initWithReturnBlock:^(NSString *code) {
+        if (code) {
+            NSURL *URL = [NSURL URLWithString:code];
+            if (URL) {
+                [[UIApplication sharedApplication] openURL:URL];
+            }
+        }
+    }];
+    */
+    
     return YES;
 }
 
@@ -69,7 +79,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [((SWBViewController *) self.window.rootViewController) saveData];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -82,7 +91,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [((SWBViewController *) self.window.rootViewController) saveData];
 }
 
 #pragma mark - Run proxy

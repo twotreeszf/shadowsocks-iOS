@@ -18,11 +18,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) SWBViewController *viewController;
-
-@property (nonatomic, strong) SWBNetworkActivityIndicatorManager *networkActivityIndicatorManager;
-
-- (void)setPolipo:(BOOL)enabled;
-- (void)updateProxyMode;
-
 @end

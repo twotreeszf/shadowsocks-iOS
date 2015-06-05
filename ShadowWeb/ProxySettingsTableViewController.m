@@ -57,27 +57,12 @@
 
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = done;
-    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    self.navigationItem.leftBarButtonItem = cancel;
-    self.navigationItem.title = _L(Proxy
-    Settings);
+    self.navigationItem.title = _L(ProxySettings);
 
     self.contentSizeForViewInPopover = CGSizeMake(320, 400);
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 #pragma mark - navigation
-
-- (void)cancel {
-    [self dismissModalViewControllerAnimated:YES];
-    if (self->_myPopoverController) {
-        [_myPopoverController dismissPopoverAnimated:YES];
-    }
-}
 
 - (void)done {
     if (ipField.text == nil) {
@@ -94,11 +79,6 @@
     [ShadowsocksRunner saveConfigForKey:kShadowsocksPasswordKey value:passwordField.text];
 
     [ShadowsocksRunner reloadConfig];
-
-    [self dismissModalViewControllerAnimated:YES];
-    if (self->_myPopoverController) {
-        [_myPopoverController dismissPopoverAnimated:YES];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -272,7 +252,7 @@
                                                       initialValue:v selectionBlock:^(NSObject *value) {
                     [[NSUserDefaults standardUserDefaults] setObject:value forKey:kShadowsocksProxyModeKey];
                     SWBAppDelegate *appDelegate = (SWBAppDelegate *) [UIApplication sharedApplication].delegate;
-                    [appDelegate updateProxyMode];
+                    // [appDelegate updateProxyMode]; //todox
                 }];
         UIViewController *controller = [[UIViewController alloc] init];
         controller.contentSizeForViewInPopover = CGSizeMake(320, 480);
@@ -291,8 +271,6 @@
                                                      initialValue:nil selectionBlock:^(NSObject *value) {
                     SWBAppDelegate *appDelegate = (SWBAppDelegate *) [UIApplication sharedApplication].delegate;
                     NSString *v = (NSString *) value;
-                    [appDelegate setPolipo:[v rangeOfString:@"enable"].length > 0];
-                    // TODO: open after 1s, using a timer
                     [[UIApplication sharedApplication] openURL:
                             [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:8080/apn?id=%@", (NSString *) value]]];
                 }];
