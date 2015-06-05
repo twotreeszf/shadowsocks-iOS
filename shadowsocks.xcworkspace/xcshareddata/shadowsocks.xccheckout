@@ -10,10 +10,10 @@
 	<string>shadowsocks</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>022E97A975C53C8D373E790A735778B47E923227</key>
+		<string>https://github.com/binss/shadowsocks-iOS.git</string>
 		<key>423DC45DFFDDC223DDAAA21CECBECC0E9E51BD53</key>
 		<string>https://github.com/clowwindy/iProxy.git</string>
-		<key>47B28B5207C05DF6BD98596A65434B6D5978C4BA</key>
-		<string>https://github.com/binss/shadowsocks-iOS.git</string>
 		<key>6ACBD9B75A9AF01FED3B43D5A1DC054996850174</key>
 		<string>https://github.com/nicklockwood/GZIP.git</string>
 		<key>8092C8C7FB5C3FF769ACA4A4D09F354B1F39375F</key>
@@ -31,10 +31,10 @@
 	<string>shadowsocks.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>022E97A975C53C8D373E790A735778B47E923227</key>
+		<string>..</string>
 		<key>423DC45DFFDDC223DDAAA21CECBECC0E9E51BD53</key>
 		<string>..iProxy</string>
-		<key>47B28B5207C05DF6BD98596A65434B6D5978C4BA</key>
-		<string>..</string>
 		<key>6ACBD9B75A9AF01FED3B43D5A1DC054996850174</key>
 		<string>..GZIP</string>
 		<key>8092C8C7FB5C3FF769ACA4A4D09F354B1F39375F</key>
@@ -53,14 +53,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>47B28B5207C05DF6BD98596A65434B6D5978C4BA</string>
+	<string>022E97A975C53C8D373E790A735778B47E923227</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>47B28B5207C05DF6BD98596A65434B6D5978C4BA</string>
+			<string>022E97A975C53C8D373E790A735778B47E923227</string>
 			<key>IDESourceControlWCCName</key>
 			<string>shadowsocks-iOS</string>
 		</dict>
