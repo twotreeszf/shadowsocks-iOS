@@ -5,18 +5,12 @@
 //  Created by clowwindy on 2/16/13.
 //  Copyright (c) 2013 clowwindy. All rights reserved.
 //
-#import "GZIP.h"
-#import "AppProxyCap.h"
 #import "SWBAppDelegate.h"
 
-#import "GCDWebServer.h"
 #import "SWBViewController.h"
 #import "ShadowsocksRunner.h"
 
 #define kProxyModeKey @"proxy mode"
-
-int polipo_main(int argc, char **argv);
-void polipo_exit();
 
 @implementation SWBAppDelegate {
     BOOL polipoRunning;
@@ -24,19 +18,7 @@ void polipo_exit();
     NSURL *ssURL;
 }
 
-- (void)updateProxyMode {
-    NSString *proxyMode = [[NSUserDefaults standardUserDefaults] objectForKey:kProxyModeKey];
-    if (proxyMode == nil || [proxyMode isEqualToString:@"pac"]) {
-        [AppProxyCap setPACURL:@"http://127.0.0.1:8090/proxy.pac"];
-    } else if ([proxyMode isEqualToString:@"global"]) {
-        [AppProxyCap setProxy:AppProxy_SOCKS Host:@"127.0.0.1" Port:9888];
-    } else{
-        [AppProxyCap setNoProxy];
-    }
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self updateProxyMode];
 
     [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
 
@@ -46,36 +28,6 @@ void polipo_exit();
     dispatch_async(proxy, ^{
         [self runProxy];
     });
-
-//    [self proxyHttpStart];
-//    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updatePolipo) userInfo:nil repeats:YES];
-
-    NSData *pacData = [[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"proxy" withExtension:@"pac.gz"]] gunzippedData];
-    GCDWebServer *webServer = [[GCDWebServer alloc] init];
-    [webServer addHandlerForMethod:@"GET" path:@"/proxy.pac" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
-             return [GCDWebServerDataResponse responseWithData:pacData contentType:@"application/x-ns-proxy-autoconfig"];
-
-         }
-    ];
-
-    [webServer addHandlerForMethod:@"GET" path:@"/apn" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
-            NSString *apnID = request.query[@"id"];
-            NSData *mobileconfig = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:apnID withExtension:@"mobileconfig"]];
-            return [GCDWebServerDataResponse responseWithData:mobileconfig contentType:@"application/x-apple-aspen-config"];
-         }
-    ];
-
-
-    [webServer startWithPort:8090 bonjourName:@"webserver"];
-//    dispatch_queue_t web = dispatch_queue_create("web", NULL);
-//    dispatch_async(web, ^{
-//        @try {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//            });
-//        } @catch (NSException *e) {
-//            NSLog(@"webserver quit with error: %@", e);
-//        }
-//    });
 
     self.networkActivityIndicatorManager = [[SWBNetworkActivityIndicatorManager alloc] init];
 
@@ -147,76 +99,5 @@ void polipo_exit();
 }
 
 #pragma mark polipo
-
--(void) updatePolipo {
-    if (!polipoRunning) {
-        [self proxyHttpStart];
-    }
-}
-
-- (void) proxyHttpStart
-{
-    if (polipoRunning) {
-        NSLog(@"already running");
-        return;
-    }
-    polipoRunning = YES;
-    if (polipoEnabled) {
-        [NSThread detachNewThreadSelector:@selector(proxyHttpRun) toTarget:self withObject:nil];
-    } else{
-        [NSThread detachNewThreadSelector:@selector(proxyHttpRunDisabled) toTarget:self withObject:nil];
-    }
-}
-
-- (void) proxyHttpStop
-{
-    if (!polipoRunning) {
-        NSLog(@"not running");
-        return;
-    }
-    polipo_exit();
-}
-
-- (void) proxyHttpRunDisabled {
- @autoreleasepool {
-         polipoRunning = YES;
-        NSLog(@"http proxy start");
-        NSString *configuration = [[NSBundle mainBundle] pathForResource:@"polipo_disable" ofType:@"config"];
-        char *args[5] = {
-            "test",
-            "-c",
-            (char*)[configuration UTF8String],
-            "proxyAddress=127.0.0.1",
-            (char*)[[NSString stringWithFormat:@"proxyPort=%d", 8081] UTF8String],
-        };
-        polipo_main(5, args);
-        NSLog(@"http proxy stop");
-        polipoRunning = NO;
-    }}
-
-- (void) proxyHttpRun
-{
-    @autoreleasepool {
-        polipoRunning = YES;
-        NSLog(@"http proxy start");
-        NSString *configuration = [[NSBundle mainBundle] pathForResource:@"polipo" ofType:@"config"];
-        char *args[5] = {
-            "test",
-            "-c",
-            (char*)[configuration UTF8String],
-            "proxyAddress=0.0.0.0",
-            (char*)[[NSString stringWithFormat:@"proxyPort=%d", 8081] UTF8String],
-        };
-        polipo_main(5, args);
-        NSLog(@"http proxy stop");
-        polipoRunning = NO;
-    }
-}
-
-- (void)setPolipo:(BOOL)enabled {
-    polipoEnabled = enabled;
-
-    [self proxyHttpStop];
-}
 
 @end

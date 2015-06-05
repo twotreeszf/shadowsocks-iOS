@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppProxyCap.h"
 #import "SWBAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-		[AppProxyCap activate];
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([SWBAppDelegate class]));
     }
 }

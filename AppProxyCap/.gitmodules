@@ -1,3 +1,0 @@
-[submodule "lib/inject_and_interpose"]
-	path = lib/inject_and_interpose
-	url = git://github.com/comex/inject_and_interpose.git
