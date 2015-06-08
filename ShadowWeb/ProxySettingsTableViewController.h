@@ -13,6 +13,4 @@
     UITextField *portField;
     UITextField *passwordField;
 }
-
-@property (nonatomic, weak) UIPopoverController *myPopoverController;
 @end

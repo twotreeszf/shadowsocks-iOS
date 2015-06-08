@@ -11,8 +11,6 @@
 #define kShadowsocksPasswordKey @"proxy password"
 #define kShadowsocksEncryptionKey @"proxy encryption"
 #define kShadowsocksProxyModeKey @"proxy mode"
-#define kShadowsocksUsePublicServer @"public server"
-
 
 @interface ShadowsocksRunner : NSObject
 
@@ -23,8 +21,5 @@
 + (NSURL *)generateSSURL;
 + (NSString *)configForKey:(NSString *)key;
 + (void)saveConfigForKey:(NSString *)key value:(NSString *)value;
-+ (void)setUsingPublicServer:(BOOL)use;
-+ (BOOL)isUsingPublicServer;
-
 
 @end

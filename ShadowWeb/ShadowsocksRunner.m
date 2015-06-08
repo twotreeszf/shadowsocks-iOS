@@ -12,13 +12,10 @@
 }
 
 + (BOOL)settingsAreNotComplete {
-    if ((![ShadowsocksRunner isUsingPublicServer]) && ([[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksIPKey] == nil ||
-            [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPortKey] == nil ||
-            [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPasswordKey] == nil)) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return
+    [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksIPKey] == nil ||
+    [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPortKey] == nil ||
+    [[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPasswordKey] == nil;
 }
 
 + (BOOL)runProxy {
@@ -35,16 +32,15 @@
 
 + (void)reloadConfig {
     if (![ShadowsocksRunner settingsAreNotComplete]) {
-        if ([ShadowsocksRunner isUsingPublicServer]) {
-            set_config("106.186.124.182", "8911", "Shadowsocks", "aes-128-cfb");
-            memcpy(shadowsocks_key, "\x45\xd1\xd9\x9e\xbd\xf5\x8c\x85\x34\x55\xdd\x65\x46\xcd\x06\xd3", 16);
-        } else {
-            NSString *v = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksEncryptionKey];
-            if (!v) {
-                v = @"aes-256-cfb";
-            }
-            set_config([[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksIPKey] cStringUsingEncoding:NSUTF8StringEncoding], [[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPortKey] cStringUsingEncoding:NSUTF8StringEncoding], [[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPasswordKey] cStringUsingEncoding:NSUTF8StringEncoding], [v cStringUsingEncoding:NSUTF8StringEncoding]);
-        }
+        NSString *v = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksEncryptionKey];
+        if (!v)
+            v = @"aes-256-cfb";
+        
+        set_config(
+                   [[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksIPKey] UTF8String],
+                   [[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPortKey] UTF8String],
+                   [[[NSUserDefaults standardUserDefaults] stringForKey:kShadowsocksPasswordKey] UTF8String],
+                   [v UTF8String]);
     }
 }
 
@@ -90,7 +86,6 @@
         [ShadowsocksRunner saveConfigForKey:kShadowsocksPortKey value:port];
         [ShadowsocksRunner saveConfigForKey:kShadowsocksPasswordKey value:password];
         [ShadowsocksRunner saveConfigForKey:kShadowsocksEncryptionKey value:method];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kShadowsocksUsePublicServer];
         [ShadowsocksRunner reloadConfig];
         return YES;
     }
@@ -100,9 +95,6 @@
 }
 
 +(NSURL *)generateSSURL {
-    if ([ShadowsocksRunner isUsingPublicServer]) {
-        return nil;
-    }
     NSString *parts = [NSString stringWithFormat:@"%@:%@@%@:%@",
                        [ShadowsocksRunner configForKey:kShadowsocksEncryptionKey],
                        [ShadowsocksRunner configForKey:kShadowsocksPasswordKey],
@@ -120,20 +112,6 @@
 
 + (NSString *)configForKey:(NSString *)key {
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
-}
-
-+ (void)setUsingPublicServer:(BOOL)use {
-    [[NSUserDefaults standardUserDefaults] setBool:use forKey:kShadowsocksUsePublicServer];
-
-}
-
-+ (BOOL)isUsingPublicServer {
-    NSNumber *usePublicServer = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksUsePublicServer];
-    if (usePublicServer != nil) {
-        return [usePublicServer boolValue];
-    } else {
-        return YES;
-    }
 }
 
 @end

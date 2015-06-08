@@ -11,6 +11,10 @@
 #import "SimpleTableViewSource.h"
 #import "SWBAppDelegate.h"
 #import "ShadowsocksRunner.h"
+#import "TTSystemProxyManager.h"
+#import "PTPacServer.h"
+#import "KPBackgroundRunner.h"
+#import "QRCodeViewController.h"
 
 // rows
 
@@ -21,28 +25,16 @@
 // config keys
 
 
-@interface ProxySettingsTableViewController () {
-    SimpleTableViewSource *encryptionSource;
-    SimpleTableViewSource *apnSource;
-    SimpleTableViewSource *modeSource;
+@interface ProxySettingsTableViewController ()
+{
+    SimpleTableViewSource*  _encryptionSource;
+    PTPacServer*            _pacServer;
+    KPBackgroundRunner*     _bkgRunner;
 }
 
 @end
 
 @implementation ProxySettingsTableViewController
-
-- (void)changePublicServer:(UISegmentedControl *)segmentedControl {
-    BOOL result = NO;
-    if (segmentedControl.selectedSegmentIndex == 0) {
-        result = YES;
-    }
-    [ShadowsocksRunner setUsingPublicServer:result];
-    if ((self.tableView.numberOfSections == 1) && !result) {
-        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-    } else if ((self.tableView.numberOfSections == 2) && result) {
-        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -54,17 +46,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = done;
-    self.navigationItem.title = _L(ProxySettings);
-
-    self.contentSizeForViewInPopover = CGSizeMake(320, 400);
+    
+    _pacServer = [[PTPacServer alloc] initWithLocalProxyPort:7070];
+    _bkgRunner = [KPBackgroundRunner new];
+    
+    UIBarButtonItem *showQRCode =  [[UIBarButtonItem alloc] initWithTitle:_L(QR)
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(showQRCode)];
+    UIBarButtonItem *scanQRCode = [[UIBarButtonItem alloc] initWithTitle:_L(Scan)
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(scanQRCode)];
+    self.navigationItem.leftBarButtonItem = showQRCode;
+    self.navigationItem.rightBarButtonItem = scanQRCode;
+    self.navigationItem.title = _L(Shadowsocks);
 }
 
-#pragma mark - navigation
-
-- (void)done {
+- (void)done: (UISwitch*)sender {
     if (ipField.text == nil) {
         ipField.text = @"";
     }
@@ -79,6 +78,48 @@
     [ShadowsocksRunner saveConfigForKey:kShadowsocksPasswordKey value:passwordField.text];
 
     [ShadowsocksRunner reloadConfig];
+    
+    
+    if (sender.isOn)
+    {
+        if (![ShadowsocksRunner settingsAreNotComplete])
+        {
+            // [[TTSystemProxyManager sharedInstance] enableSocksProxy:@"127.0.0.1" :7070];
+            [_pacServer start];
+            _bkgRunner.enable = YES;
+            
+            NSString* url = _pacServer.pacFileAddress;
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = url;
+        }
+    }
+    else
+    {
+        // [[TTSystemProxyManager sharedInstance] disableProxy];
+        [_pacServer stop];
+        _bkgRunner.enable = NO;
+    }
+}
+
+- (void)scanQRCode
+{
+    QRCodeViewController *qrCodeViewController =
+    [[QRCodeViewController alloc] initWithReturnBlock:^(NSString *code)
+     {
+         if (code) {
+             NSURL *URL = [NSURL URLWithString:code];
+             if (URL) {
+                 [[UIApplication sharedApplication] openURL:URL];
+                 
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                 {
+                     [self.tableView reloadData];
+                 });
+             }
+         }
+     }];
+    
+    [self presentModalViewController:qrCodeViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,10 +130,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    if ([ShadowsocksRunner isUsingPublicServer]) {
-        return 1;
-    }
     return 2;
 }
 
@@ -106,24 +143,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0) {
+    if (section == 0)
         return 1;
-    }
-    return 5;
+    else
+        return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"c"];
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[_L(Public), _L(Custom)]];
-        [cell.contentView addSubview:segmentedControl];
-        segmentedControl.center = CGPointMake(320 * 0.5f, cell.bounds.size.height * 0.5f);
-        if ([ShadowsocksRunner isUsingPublicServer]) {
-            segmentedControl.selectedSegmentIndex = 0;
-        } else {
-            segmentedControl.selectedSegmentIndex = 1;
-        }
-        [segmentedControl addTarget:self action:@selector(changePublicServer:) forControlEvents:UIControlEventValueChanged];
+        
+        cell.textLabel.text = _L(Enable);
+
+        UISwitch* onoff = [UISwitch new];
+        onoff.center = CGPointMake(cell.bounds.size.width - 40.0, cell.bounds.size.height * 0.5);
+        [onoff addTarget:self action:@selector(done:) forControlEvents:UIControlEventValueChanged];
+        
+        [cell.contentView addSubview:onoff];
+        
         return cell;
     } else if (indexPath.section == 1) {
         if (indexPath.row == 3) {
@@ -133,20 +170,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-        if (indexPath.row == 4) {
-            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"bb"];
-            cell.textLabel.text = _L(Proxy
-            Mode);
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }
-        if (indexPath.row == 5) {
-            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"bb"];
-            cell.textLabel.text = _L(Enable / Disable
-            APN);
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }
+        
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"aaaaa"];
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(110, 10, 185, 30)];
         textField.adjustsFontSizeToFitWidth = YES;
@@ -189,96 +213,28 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
     if (indexPath.row == 3) {
         NSString *v = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksEncryptionKey];
         if (!v) {
             v = @"aes-256-cfb";
         }
-        encryptionSource = [[SimpleTableViewSource alloc] initWithLabels:[NSArray arrayWithObjects:@"table",
-                                                                                                   @"aes-256-cfb",
-                                                                                                   @"aes-192-cfb",
-                                                                                                   @"aes-128-cfb",
-                                                                                                   @"bf-cfb",
-                                                                                                   @"camellia-128-cfb",
-                                                                                                   @"camellia-192-cfb",
-                                                                                                   @"camellia-256-cfb",
-                                                                                                   @"cast5-cfb",
-                                                                                                   @"des-cfb",
-                                                                                                   @"idea-cfb",
-                                                                                                   @"rc2-cfb",
-                                                                                                   @"rc4",
-                                                                                                   @"seed-cfb",
-                                                                                                   nil]
-                                                                  values:[NSArray arrayWithObjects:@"table",
-                                                                                                   @"aes-256-cfb",
-                                                                                                   @"aes-192-cfb",
-                                                                                                   @"aes-128-cfb",
-                                                                                                   @"bf-cfb",
-                                                                                                   @"camellia-128-cfb",
-                                                                                                   @"camellia-192-cfb",
-                                                                                                   @"camellia-256-cfb",
-                                                                                                   @"cast5-cfb",
-                                                                                                   @"des-cfb",
-                                                                                                   @"idea-cfb",
-                                                                                                   @"rc2-cfb",
-                                                                                                   @"rc4",
-                                                                                                   @"seed-cfb",
-                                                                                                   nil]
+        _encryptionSource = [[SimpleTableViewSource alloc] initWithLabels:
+                            [NSArray arrayWithObjects:@"table", @"aes-256-cfb", @"aes-192-cfb", @"aes-128-cfb",
+                             @"bf-cfb", @"camellia-128-cfb", @"camellia-192-cfb", @"camellia-256-cfb", @"cast5-cfb",
+                             @"des-cfb", @"idea-cfb", @"rc2-cfb", @"rc4", @"seed-cfb", nil]
+                                                                  values:
+                            [NSArray arrayWithObjects:@"table", @"aes-256-cfb", @"aes-192-cfb", @"aes-128-cfb",
+                             @"bf-cfb", @"camellia-128-cfb", @"camellia-192-cfb", @"camellia-256-cfb", @"cast5-cfb",
+                             @"des-cfb", @"idea-cfb", @"rc2-cfb", @"rc4", @"seed-cfb", nil]
                                                             initialValue:v selectionBlock:^(NSObject *value) {
-                    [[NSUserDefaults standardUserDefaults] setObject:value forKey:kShadowsocksEncryptionKey];
-                }];
+                                                                [[NSUserDefaults standardUserDefaults] setObject:value forKey:kShadowsocksEncryptionKey];
+                                                            }];
         UIViewController *controller = [[UIViewController alloc] init];
         controller.contentSizeForViewInPopover = self.contentSizeForViewInPopover;
         controller.navigationItem.title = _L(Method);
         UITableView *tableView1 = [[UITableView alloc] initWithFrame:controller.view.frame style:UITableViewStyleGrouped];
-        tableView1.dataSource = encryptionSource;
-        tableView1.delegate = encryptionSource;
-        controller.view = tableView1;
-        [self.navigationController pushViewController:controller animated:YES];
-    } else if (indexPath.row == 4) {
-        NSString *v = [[NSUserDefaults standardUserDefaults] objectForKey:kShadowsocksProxyModeKey];
-        if (!v) {
-            v = @"pac";
-        }
-        modeSource = [[SimpleTableViewSource alloc] initWithLabels:[NSArray arrayWithObjects:_L(PAC), _L(Global), nil]
-                                                            values:[NSArray arrayWithObjects:@"pac", @"global", nil]
-                                                      initialValue:v selectionBlock:^(NSObject *value) {
-                    [[NSUserDefaults standardUserDefaults] setObject:value forKey:kShadowsocksProxyModeKey];
-                    SWBAppDelegate *appDelegate = (SWBAppDelegate *) [UIApplication sharedApplication].delegate;
-                    // [appDelegate updateProxyMode]; //todox
-                }];
-        UIViewController *controller = [[UIViewController alloc] init];
-        controller.contentSizeForViewInPopover = CGSizeMake(320, 480);
-        controller.navigationItem.title = _L(Proxy
-        Mode);
-        UITableView *tableView1 = [[UITableView alloc] initWithFrame:controller.view.frame style:UITableViewStyleGrouped];
-        tableView1.dataSource = modeSource;
-        tableView1.delegate = modeSource;
-        controller.view = tableView1;
-        [self.navigationController pushViewController:controller animated:YES];
-    } else if (indexPath.row == 5) {
-        apnSource = [[SimpleTableViewSource alloc] initWithLabels:[NSArray arrayWithObjects:_L(Enable
-        Unicom), _L(Disable
-        Unicom), nil]
-                                                           values:[NSArray arrayWithObjects:@"3gnet_enable", @"3gnet_disable", nil]
-                                                     initialValue:nil selectionBlock:^(NSObject *value) {
-                    SWBAppDelegate *appDelegate = (SWBAppDelegate *) [UIApplication sharedApplication].delegate;
-                    NSString *v = (NSString *) value;
-                    [[UIApplication sharedApplication] openURL:
-                            [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:8080/apn?id=%@", (NSString *) value]]];
-                }];
-        UIViewController *controller = [[UIViewController alloc] init];
-        controller.contentSizeForViewInPopover = CGSizeMake(320, 480);
-        UITableView *tableView1 = [[UITableView alloc] initWithFrame:controller.view.frame style:UITableViewStyleGrouped];
-        tableView1.dataSource = apnSource;
-        tableView1.delegate = apnSource;
+        tableView1.dataSource = _encryptionSource;
+        tableView1.delegate = _encryptionSource;
         controller.view = tableView1;
         [self.navigationController pushViewController:controller animated:YES];
     }

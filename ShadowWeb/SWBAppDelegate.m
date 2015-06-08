@@ -23,7 +23,7 @@
     [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
 
     }];
-    polipoEnabled = YES;
+
     dispatch_queue_t proxy = dispatch_queue_create("proxy", NULL);
     dispatch_async(proxy, ^{
         [self runProxy];
@@ -35,17 +35,6 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settingsController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
-
-    /*
-    QRCodeViewController *qrCodeViewController = [[QRCodeViewController alloc] initWithReturnBlock:^(NSString *code) {
-        if (code) {
-            NSURL *URL = [NSURL URLWithString:code];
-            if (URL) {
-                [[UIApplication sharedApplication] openURL:URL];
-            }
-        }
-    }];
-    */
     
     return YES;
 }

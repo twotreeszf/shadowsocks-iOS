@@ -14,9 +14,6 @@
 		621571B316CF6BCB003D96B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 621571B116CF6BCB003D96B4 /* InfoPlist.strings */; };
 		621571B516CF6BCB003D96B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 621571B416CF6BCB003D96B4 /* main.m */; };
 		621571B916CF6BCB003D96B4 /* SWBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 621571B816CF6BCB003D96B4 /* SWBAppDelegate.m */; };
-		621571BB16CF6BCB003D96B4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 621571BA16CF6BCB003D96B4 /* Default.png */; };
-		621571BD16CF6BCB003D96B4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 621571BC16CF6BCB003D96B4 /* Default@2x.png */; };
-		621571BF16CF6BCB003D96B4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 621571BE16CF6BCB003D96B4 /* Default-568h@2x.png */; };
 		621571EF16CF782C003D96B4 /* SWBNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 621571EE16CF782C003D96B4 /* SWBNetworkActivityIndicatorManager.m */; };
 		621571F616CF7FA7003D96B4 /* SWBPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 621571F116CF7FA6003D96B4 /* SWBPage.m */; };
 		621571F716CF7FA7003D96B4 /* SWBPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 621571F316CF7FA6003D96B4 /* SWBPageManager.m */; };
@@ -43,10 +40,29 @@
 		62DE796018B2140D00277174 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 62DE795F18B2140D00277174 /* cancel.png */; };
 		62E27E5C18C1D0F90086033D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E27E5B18C1D0F80086033D /* libz.dylib */; };
 		96D80C05176CE1D7006C8078 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D80C04176CE1D7006C8078 /* AVFoundation.framework */; };
+		E86842E21B229C8C0080E03A /* TTSystemProxyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842E11B229C8C0080E03A /* TTSystemProxyManager.m */; };
+		E86842E51B229CD20080E03A /* TTCFEasyReleasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842E41B229CD20080E03A /* TTCFEasyReleasePool.m */; };
+		E86842E81B229E2B0080E03A /* shadowsocks.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = E86842E71B229E2B0080E03A /* shadowsocks.entitlements */; };
+		E86843091B22A4CB0080E03A /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842EC1B22A4CB0080E03A /* GCDWebServer.m */; };
+		E868430A1B22A4CB0080E03A /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842EE1B22A4CB0080E03A /* GCDWebServerConnection.m */; };
+		E868430B1B22A4CB0080E03A /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842F01B22A4CB0080E03A /* GCDWebServerFunctions.m */; };
+		E868430C1B22A4CB0080E03A /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842F41B22A4CB0080E03A /* GCDWebServerRequest.m */; };
+		E868430D1B22A4CB0080E03A /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842F61B22A4CB0080E03A /* GCDWebServerResponse.m */; };
+		E868430E1B22A4CB0080E03A /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842F91B22A4CB0080E03A /* GCDWebServerDataRequest.m */; };
+		E868430F1B22A4CB0080E03A /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842FB1B22A4CB0080E03A /* GCDWebServerFileRequest.m */; };
+		E86843101B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842FD1B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.m */; };
+		E86843111B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E86842FF1B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.m */; };
+		E86843121B22A4CB0080E03A /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843021B22A4CB0080E03A /* GCDWebServerDataResponse.m */; };
+		E86843131B22A4CB0080E03A /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843041B22A4CB0080E03A /* GCDWebServerErrorResponse.m */; };
+		E86843141B22A4CB0080E03A /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843061B22A4CB0080E03A /* GCDWebServerFileResponse.m */; };
+		E86843151B22A4CB0080E03A /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843081B22A4CB0080E03A /* GCDWebServerStreamedResponse.m */; };
+		E868431D1B22A4DD0080E03A /* KPBackgroundRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843181B22A4DD0080E03A /* KPBackgroundRunner.m */; };
+		E868431E1B22A4DD0080E03A /* mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E86843191B22A4DD0080E03A /* mute.mp3 */; };
+		E868431F1B22A4DD0080E03A /* PTPacServer.m in Sources */ = {isa = PBXBuildFile; fileRef = E868431C1B22A4DD0080E03A /* PTPacServer.m */; };
+		E86843221B22A5E10080E03A /* NSOperationQueue+GlobalQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E86843211B22A5E10080E03A /* NSOperationQueue+GlobalQueue.m */; };
 		EB1891FD5CE9480608918422 /* SimpleTableViewSource.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1897832237B71EF50B3DF4 /* SimpleTableViewSource.m */; };
 		EB1896F6F5F2468484F67FAD /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1897A89055A4C2CFD81AF8 /* ShadowsocksRunner.m */; };
 		EB189DBA13C945ADF838DF2C /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1892CE8806A5E5632B5714 /* QRCodeViewController.m */; };
-		EB189E8C8B1866196A4DA43B /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = EB1891FD08E70E9E9DC84AFD /* about.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,9 +141,6 @@
 		621571B616CF6BCB003D96B4 /* shadowsocks-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "shadowsocks-Prefix.pch"; sourceTree = "<group>"; };
 		621571B716CF6BCB003D96B4 /* SWBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWBAppDelegate.h; sourceTree = "<group>"; };
 		621571B816CF6BCB003D96B4 /* SWBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWBAppDelegate.m; sourceTree = "<group>"; };
-		621571BA16CF6BCB003D96B4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		621571BC16CF6BCB003D96B4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		621571BE16CF6BCB003D96B4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		621571ED16CF782C003D96B4 /* SWBNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SWBNetworkActivityIndicatorManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		621571EE16CF782C003D96B4 /* SWBNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SWBNetworkActivityIndicatorManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		621571F016CF7FA6003D96B4 /* SWBPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBPage.h; sourceTree = "<group>"; };
@@ -181,8 +194,49 @@
 		781D62FE4179043C0699F3B9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		96D80C04176CE1D7006C8078 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C0FC4784BD94C2DDB0D204C1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E86842DF1B229C8C0080E03A /* PrivateSystemConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateSystemConfiguration.h; sourceTree = "<group>"; };
+		E86842E01B229C8C0080E03A /* TTSystemProxyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSystemProxyManager.h; sourceTree = "<group>"; };
+		E86842E11B229C8C0080E03A /* TTSystemProxyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTSystemProxyManager.m; sourceTree = "<group>"; };
+		E86842E31B229CD20080E03A /* TTCFEasyReleasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCFEasyReleasePool.h; sourceTree = "<group>"; };
+		E86842E41B229CD20080E03A /* TTCFEasyReleasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCFEasyReleasePool.m; sourceTree = "<group>"; };
+		E86842E61B229D740080E03A /* ErrorCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorCheck.h; sourceTree = "<group>"; };
+		E86842E71B229E2B0080E03A /* shadowsocks.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = shadowsocks.entitlements; sourceTree = SOURCE_ROOT; };
+		E86842EB1B22A4CB0080E03A /* GCDWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServer.h; sourceTree = "<group>"; };
+		E86842EC1B22A4CB0080E03A /* GCDWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServer.m; sourceTree = "<group>"; };
+		E86842ED1B22A4CB0080E03A /* GCDWebServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerConnection.h; sourceTree = "<group>"; };
+		E86842EE1B22A4CB0080E03A /* GCDWebServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerConnection.m; sourceTree = "<group>"; };
+		E86842EF1B22A4CB0080E03A /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFunctions.h; sourceTree = "<group>"; };
+		E86842F01B22A4CB0080E03A /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFunctions.m; sourceTree = "<group>"; };
+		E86842F11B22A4CB0080E03A /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
+		E86842F21B22A4CB0080E03A /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerPrivate.h; sourceTree = "<group>"; };
+		E86842F31B22A4CB0080E03A /* GCDWebServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerRequest.h; sourceTree = "<group>"; };
+		E86842F41B22A4CB0080E03A /* GCDWebServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerRequest.m; sourceTree = "<group>"; };
+		E86842F51B22A4CB0080E03A /* GCDWebServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerResponse.h; sourceTree = "<group>"; };
+		E86842F61B22A4CB0080E03A /* GCDWebServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerResponse.m; sourceTree = "<group>"; };
+		E86842F81B22A4CB0080E03A /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataRequest.h; sourceTree = "<group>"; };
+		E86842F91B22A4CB0080E03A /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataRequest.m; sourceTree = "<group>"; };
+		E86842FA1B22A4CB0080E03A /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileRequest.h; sourceTree = "<group>"; };
+		E86842FB1B22A4CB0080E03A /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileRequest.m; sourceTree = "<group>"; };
+		E86842FC1B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
+		E86842FD1B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
+		E86842FE1B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
+		E86842FF1B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
+		E86843011B22A4CB0080E03A /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerDataResponse.h; sourceTree = "<group>"; };
+		E86843021B22A4CB0080E03A /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerDataResponse.m; sourceTree = "<group>"; };
+		E86843031B22A4CB0080E03A /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
+		E86843041B22A4CB0080E03A /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
+		E86843051B22A4CB0080E03A /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerFileResponse.h; sourceTree = "<group>"; };
+		E86843061B22A4CB0080E03A /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerFileResponse.m; sourceTree = "<group>"; };
+		E86843071B22A4CB0080E03A /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
+		E86843081B22A4CB0080E03A /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
+		E86843171B22A4DD0080E03A /* KPBackgroundRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPBackgroundRunner.h; sourceTree = "<group>"; };
+		E86843181B22A4DD0080E03A /* KPBackgroundRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPBackgroundRunner.m; sourceTree = "<group>"; };
+		E86843191B22A4DD0080E03A /* mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mute.mp3; sourceTree = "<group>"; };
+		E868431B1B22A4DD0080E03A /* PTPacServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPacServer.h; sourceTree = "<group>"; };
+		E868431C1B22A4DD0080E03A /* PTPacServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPacServer.m; sourceTree = "<group>"; };
+		E86843201B22A5E10080E03A /* NSOperationQueue+GlobalQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+GlobalQueue.h"; sourceTree = "<group>"; };
+		E86843211B22A5E10080E03A /* NSOperationQueue+GlobalQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+GlobalQueue.m"; sourceTree = "<group>"; };
 		EB189069EF341E65B5414D00 /* QRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeViewController.h; sourceTree = "<group>"; };
-		EB1891FD08E70E9E9DC84AFD /* about.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = about.txt; sourceTree = "<group>"; };
 		EB1892CE8806A5E5632B5714 /* QRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeViewController.m; sourceTree = "<group>"; };
 		EB18942F05960F64CC059413 /* SimpleTableViewSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableViewSource.h; sourceTree = "<group>"; };
 		EB1897832237B71EF50B3DF4 /* SimpleTableViewSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableViewSource.m; sourceTree = "<group>"; };
@@ -243,7 +297,6 @@
 				621571AE16CF6BCB003D96B4 /* ShadowWeb */,
 				621571A716CF6BCB003D96B4 /* Frameworks */,
 				621571A616CF6BCB003D96B4 /* Products */,
-				EB1891FD08E70E9E9DC84AFD /* about.txt */,
 				57736096DD9C426AF787D346 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -297,6 +350,8 @@
 		621571AE16CF6BCB003D96B4 /* ShadowWeb */ = {
 			isa = PBXGroup;
 			children = (
+				E86842E91B22A4CB0080E03A /* GCDWebServer */,
+				E86842DC1B229C8C0080E03A /* Misc */,
 				626C4AD818B1E338003DBE33 /* base64 */,
 				628693FA16DA2823008B1A26 /* Shadowsocks */,
 				628693F916DA281C008B1A26 /* libev */,
@@ -311,14 +366,12 @@
 		621571AF16CF6BCB003D96B4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E86842E71B229E2B0080E03A /* shadowsocks.entitlements */,
 				62DE795F18B2140D00277174 /* cancel.png */,
 				621571B016CF6BCB003D96B4 /* shadowsocks-Info.plist */,
 				621571B116CF6BCB003D96B4 /* InfoPlist.strings */,
 				621571B416CF6BCB003D96B4 /* main.m */,
 				621571B616CF6BCB003D96B4 /* shadowsocks-Prefix.pch */,
-				621571BA16CF6BCB003D96B4 /* Default.png */,
-				621571BC16CF6BCB003D96B4 /* Default@2x.png */,
-				621571BE16CF6BCB003D96B4 /* Default-568h@2x.png */,
 				628C3DE118AD5AFA0090632A /* Localizable.strings */,
 			);
 			name = "Supporting Files";
@@ -379,6 +432,8 @@
 		628693FA16DA2823008B1A26 /* Shadowsocks */ = {
 			isa = PBXGroup;
 			children = (
+				E86843161B22A4DD0080E03A /* BackgroundRunner */,
+				E868431A1B22A4DD0080E03A /* PacServer */,
 				628693EF16DA2816008B1A26 /* encrypt.h */,
 				628693EE16DA2815008B1A26 /* encrypt.c */,
 				62CD119D175E3E23008C4D0C /* table.h */,
@@ -396,6 +451,115 @@
 				EB189E412781A71BA967EECE /* ShadowsocksRunner.h */,
 			);
 			name = Shadowsocks;
+			sourceTree = "<group>";
+		};
+		E86842DC1B229C8C0080E03A /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				E86843201B22A5E10080E03A /* NSOperationQueue+GlobalQueue.h */,
+				E86843211B22A5E10080E03A /* NSOperationQueue+GlobalQueue.m */,
+				E86842E61B229D740080E03A /* ErrorCheck.h */,
+				E86842E31B229CD20080E03A /* TTCFEasyReleasePool.h */,
+				E86842E41B229CD20080E03A /* TTCFEasyReleasePool.m */,
+				E86842DD1B229C8C0080E03A /* PrivateAPI */,
+			);
+			path = Misc;
+			sourceTree = SOURCE_ROOT;
+		};
+		E86842DD1B229C8C0080E03A /* PrivateAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E86842DE1B229C8C0080E03A /* SystemConfiguration */,
+			);
+			path = PrivateAPI;
+			sourceTree = "<group>";
+		};
+		E86842DE1B229C8C0080E03A /* SystemConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				E86842DF1B229C8C0080E03A /* PrivateSystemConfiguration.h */,
+				E86842E01B229C8C0080E03A /* TTSystemProxyManager.h */,
+				E86842E11B229C8C0080E03A /* TTSystemProxyManager.m */,
+			);
+			path = SystemConfiguration;
+			sourceTree = "<group>";
+		};
+		E86842E91B22A4CB0080E03A /* GCDWebServer */ = {
+			isa = PBXGroup;
+			children = (
+				E86842EA1B22A4CB0080E03A /* Core */,
+				E86842F71B22A4CB0080E03A /* Requests */,
+				E86843001B22A4CB0080E03A /* Responses */,
+			);
+			path = GCDWebServer;
+			sourceTree = SOURCE_ROOT;
+		};
+		E86842EA1B22A4CB0080E03A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E86842EB1B22A4CB0080E03A /* GCDWebServer.h */,
+				E86842EC1B22A4CB0080E03A /* GCDWebServer.m */,
+				E86842ED1B22A4CB0080E03A /* GCDWebServerConnection.h */,
+				E86842EE1B22A4CB0080E03A /* GCDWebServerConnection.m */,
+				E86842EF1B22A4CB0080E03A /* GCDWebServerFunctions.h */,
+				E86842F01B22A4CB0080E03A /* GCDWebServerFunctions.m */,
+				E86842F11B22A4CB0080E03A /* GCDWebServerHTTPStatusCodes.h */,
+				E86842F21B22A4CB0080E03A /* GCDWebServerPrivate.h */,
+				E86842F31B22A4CB0080E03A /* GCDWebServerRequest.h */,
+				E86842F41B22A4CB0080E03A /* GCDWebServerRequest.m */,
+				E86842F51B22A4CB0080E03A /* GCDWebServerResponse.h */,
+				E86842F61B22A4CB0080E03A /* GCDWebServerResponse.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E86842F71B22A4CB0080E03A /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				E86842F81B22A4CB0080E03A /* GCDWebServerDataRequest.h */,
+				E86842F91B22A4CB0080E03A /* GCDWebServerDataRequest.m */,
+				E86842FA1B22A4CB0080E03A /* GCDWebServerFileRequest.h */,
+				E86842FB1B22A4CB0080E03A /* GCDWebServerFileRequest.m */,
+				E86842FC1B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.h */,
+				E86842FD1B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.m */,
+				E86842FE1B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.h */,
+				E86842FF1B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		E86843001B22A4CB0080E03A /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				E86843011B22A4CB0080E03A /* GCDWebServerDataResponse.h */,
+				E86843021B22A4CB0080E03A /* GCDWebServerDataResponse.m */,
+				E86843031B22A4CB0080E03A /* GCDWebServerErrorResponse.h */,
+				E86843041B22A4CB0080E03A /* GCDWebServerErrorResponse.m */,
+				E86843051B22A4CB0080E03A /* GCDWebServerFileResponse.h */,
+				E86843061B22A4CB0080E03A /* GCDWebServerFileResponse.m */,
+				E86843071B22A4CB0080E03A /* GCDWebServerStreamedResponse.h */,
+				E86843081B22A4CB0080E03A /* GCDWebServerStreamedResponse.m */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		E86843161B22A4DD0080E03A /* BackgroundRunner */ = {
+			isa = PBXGroup;
+			children = (
+				E86843171B22A4DD0080E03A /* KPBackgroundRunner.h */,
+				E86843181B22A4DD0080E03A /* KPBackgroundRunner.m */,
+				E86843191B22A4DD0080E03A /* mute.mp3 */,
+			);
+			path = BackgroundRunner;
+			sourceTree = "<group>";
+		};
+		E868431A1B22A4DD0080E03A /* PacServer */ = {
+			isa = PBXGroup;
+			children = (
+				E868431B1B22A4DD0080E03A /* PTPacServer.h */,
+				E868431C1B22A4DD0080E03A /* PTPacServer.m */,
+			);
+			path = PacServer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +613,19 @@
 				CLASSPREFIX = SWB;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = clowwindy;
+				TargetAttributes = {
+					621571A416CF6BCB003D96B4 = {
+						DevelopmentTeam = 8PUEFH8BBB;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 621571A016CF6BCA003D96B4 /* Build configuration list for PBXProject "shadowsocks" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -520,12 +697,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				621571B316CF6BCB003D96B4 /* InfoPlist.strings in Resources */,
-				621571BB16CF6BCB003D96B4 /* Default.png in Resources */,
+				E868431E1B22A4DD0080E03A /* mute.mp3 in Resources */,
 				628C3DDF18AD5AFA0090632A /* Localizable.strings in Resources */,
-				621571BD16CF6BCB003D96B4 /* Default@2x.png in Resources */,
-				621571BF16CF6BCB003D96B4 /* Default-568h@2x.png in Resources */,
 				62DE796018B2140D00277174 /* cancel.png in Resources */,
-				EB189E8C8B1866196A4DA43B /* about.txt in Resources */,
+				E86842E81B229E2B0080E03A /* shadowsocks.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,15 +758,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				621571B516CF6BCB003D96B4 /* main.m in Sources */,
+				E86843221B22A5E10080E03A /* NSOperationQueue+GlobalQueue.m in Sources */,
 				621571B916CF6BCB003D96B4 /* SWBAppDelegate.m in Sources */,
+				E86842E51B229CD20080E03A /* TTCFEasyReleasePool.m in Sources */,
 				621571EF16CF782C003D96B4 /* SWBNetworkActivityIndicatorManager.m in Sources */,
+				E868431D1B22A4DD0080E03A /* KPBackgroundRunner.m in Sources */,
 				621571F616CF7FA7003D96B4 /* SWBPage.m in Sources */,
 				621571F716CF7FA7003D96B4 /* SWBPageManager.m in Sources */,
+				E86843091B22A4CB0080E03A /* GCDWebServer.m in Sources */,
+				E86843141B22A4CB0080E03A /* GCDWebServerFileResponse.m in Sources */,
+				E86843111B22A4CB0080E03A /* GCDWebServerURLEncodedFormRequest.m in Sources */,
+				E868430D1B22A4CB0080E03A /* GCDWebServerResponse.m in Sources */,
+				E868430E1B22A4CB0080E03A /* GCDWebServerDataRequest.m in Sources */,
 				628693F816DA2817008B1A26 /* ProxySettingsTableViewController.m in Sources */,
+				E86843121B22A4CB0080E03A /* GCDWebServerDataResponse.m in Sources */,
+				E868430F1B22A4CB0080E03A /* GCDWebServerFileRequest.m in Sources */,
+				E868430A1B22A4CB0080E03A /* GCDWebServerConnection.m in Sources */,
 				EB1891FD5CE9480608918422 /* SimpleTableViewSource.m in Sources */,
 				626C4ADB18B1E352003DBE33 /* NSData+Base64.m in Sources */,
+				E868430B1B22A4CB0080E03A /* GCDWebServerFunctions.m in Sources */,
+				E86843151B22A4CB0080E03A /* GCDWebServerStreamedResponse.m in Sources */,
+				E868430C1B22A4CB0080E03A /* GCDWebServerRequest.m in Sources */,
 				EB189DBA13C945ADF838DF2C /* QRCodeViewController.m in Sources */,
 				EB1896F6F5F2468484F67FAD /* ShadowsocksRunner.m in Sources */,
+				E86842E21B229C8C0080E03A /* TTSystemProxyManager.m in Sources */,
+				E86843131B22A4CB0080E03A /* GCDWebServerErrorResponse.m in Sources */,
+				E86843101B22A4CB0080E03A /* GCDWebServerMultiPartFormRequest.m in Sources */,
+				E868431F1B22A4DD0080E03A /* PTPacServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,9 +912,9 @@
 			baseConfigurationReference = 781D62FE4179043C0699F3B9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -753,11 +946,11 @@
 			baseConfigurationReference = C0FC4784BD94C2DDB0D204C1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -776,7 +969,7 @@
 					"\"$(SRCROOT)/OpenSSL-for-iPhone/lib\"",
 				);
 				PRODUCT_NAME = shadowsocks;
-				PROVISIONING_PROFILE = "10B86086-082B-4967-8900-EDF458793F84";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
